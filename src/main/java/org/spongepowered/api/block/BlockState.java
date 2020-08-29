@@ -28,12 +28,12 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.block.entity.BlockEntity;
 import org.spongepowered.api.data.DataManipulator;
 import org.spongepowered.api.data.DirectionRelativeDataHolder;
-import org.spongepowered.api.data.SerializableDataHolderBuilder;
 import org.spongepowered.api.data.value.Value;
 import org.spongepowered.api.fluid.FluidState;
 import org.spongepowered.api.state.State;
 import org.spongepowered.api.world.ServerLocation;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -52,6 +52,11 @@ public interface BlockState extends State<BlockState>, DirectionRelativeDataHold
      */
     static Builder builder() {
         return Sponge.getRegistry().getBuilderRegistry().provideBuilder(Builder.class);
+    }
+
+    static BlockState fromString(final String id) {
+        Objects.requireNonNull(id);
+        return Sponge.getRegistry().getBuilderRegistry().provideBuilder(Builder.class).fromString(id).build();
     }
 
     /**
@@ -113,7 +118,7 @@ public interface BlockState extends State<BlockState>, DirectionRelativeDataHold
      * <p>Note that upon creation, the {@link BlockType} must be set for validation
      * of {@link DataManipulator}s, otherwise exceptions may be thrown.</p>
      */
-    interface Builder extends SerializableDataHolderBuilder.Immutable<BlockState, Builder> {
+    interface Builder extends State.Builder<BlockState, Builder> {
 
         /**
          * Sets the {@link BlockType} for the {@link BlockState} to build.
@@ -142,6 +147,5 @@ public interface BlockState extends State<BlockState>, DirectionRelativeDataHold
          * @return This builder, for chaining
          */
         Builder blockType(BlockType blockType);
-
     }
 }
