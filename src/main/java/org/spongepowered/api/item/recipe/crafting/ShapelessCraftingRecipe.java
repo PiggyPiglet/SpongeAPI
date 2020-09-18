@@ -32,6 +32,7 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.ItemStackSnapshot;
+import org.spongepowered.api.item.recipe.RecipeRegistration;
 import org.spongepowered.api.util.CatalogBuilder;
 import org.spongepowered.api.util.ResettableBuilder;
 
@@ -53,7 +54,7 @@ public interface ShapelessCraftingRecipe extends CraftingRecipe {
     /**
      * Builder for {@link ShapelessCraftingRecipe}s.
      */
-    interface Builder extends ResettableBuilder<ShapelessCraftingRecipe, Builder> {
+    interface Builder extends ResettableBuilder<RecipeRegistration<ShapelessCraftingRecipe>, Builder> {
 
         /**
          * Adds ingredients for this recipe.
@@ -95,7 +96,7 @@ public interface ShapelessCraftingRecipe extends CraftingRecipe {
         /**
          * In this Step set the group of the Recipe and/or build it.
          */
-        interface EndStep extends Builder, CatalogBuilder<ShapelessCraftingRecipe, Builder> {
+        interface EndStep extends Builder, CatalogBuilder<RecipeRegistration<ShapelessCraftingRecipe>, Builder> {
 
             /**
              * Sets the group of the recipe.
@@ -116,7 +117,7 @@ public interface ShapelessCraftingRecipe extends CraftingRecipe {
              *                               or the {@link #key(ResourceKey)} isn't set.
              */
             @Override
-            ShapelessCraftingRecipe build() throws IllegalStateException;
+            RecipeRegistration<ShapelessCraftingRecipe> build() throws IllegalStateException;
         }
 
     }

@@ -28,6 +28,7 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStackSnapshot;
 import org.spongepowered.api.item.recipe.Recipe;
+import org.spongepowered.api.item.recipe.RecipeRegistration;
 import org.spongepowered.api.item.recipe.RecipeType;
 import org.spongepowered.api.item.recipe.crafting.Ingredient;
 import org.spongepowered.api.util.CatalogBuilder;
@@ -95,7 +96,7 @@ public interface SmeltingRecipe extends Recipe {
     /**
      * Builds a simple furnace recipe.
      */
-    interface Builder extends ResettableBuilder<SmeltingRecipe, Builder> {
+    interface Builder extends ResettableBuilder<RecipeRegistration<SmeltingRecipe>, Builder> {
 
         /**
          * Sets the type of recipe
@@ -166,7 +167,7 @@ public interface SmeltingRecipe extends Recipe {
             }
         }
 
-        interface EndStep extends Builder, CatalogBuilder<SmeltingRecipe, Builder> {
+        interface EndStep extends Builder, CatalogBuilder<RecipeRegistration<SmeltingRecipe>, Builder> {
 
             /**
              * Changes the experience and returns this builder. It is the

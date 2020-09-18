@@ -31,6 +31,7 @@ import org.spongepowered.api.ResourceKey;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.ItemStackSnapshot;
+import org.spongepowered.api.item.recipe.RecipeRegistration;
 import org.spongepowered.api.util.CatalogBuilder;
 import org.spongepowered.api.util.ResettableBuilder;
 
@@ -106,7 +107,7 @@ public interface ShapedCraftingRecipe extends CraftingRecipe {
      * }
      * </pre>
      */
-    interface Builder extends ResettableBuilder<ShapedCraftingRecipe, Builder> {
+    interface Builder extends ResettableBuilder<RecipeRegistration<ShapedCraftingRecipe>, Builder> {
 
         /**
          * Start building a new recipe based on the aisle pattern.
@@ -243,7 +244,7 @@ public interface ShapedCraftingRecipe extends CraftingRecipe {
         /**
          * In this Step set the group of the Recipe and/or build it.
          */
-        interface EndStep extends Builder, CatalogBuilder<ShapedCraftingRecipe, Builder> {
+        interface EndStep extends Builder, CatalogBuilder<RecipeRegistration<ShapedCraftingRecipe>, Builder> {
 
             /**
              * Sets the group of the recipe.
@@ -264,7 +265,7 @@ public interface ShapedCraftingRecipe extends CraftingRecipe {
              *                               or the {@link #key(ResourceKey)} isn't set.
              */
             @Override
-            ShapedCraftingRecipe build() throws IllegalStateException;
+            RecipeRegistration<ShapedCraftingRecipe> build() throws IllegalStateException;
         }
     }
 

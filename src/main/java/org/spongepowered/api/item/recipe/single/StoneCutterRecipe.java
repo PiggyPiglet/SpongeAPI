@@ -30,6 +30,7 @@ import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.ItemStackSnapshot;
 import org.spongepowered.api.item.recipe.Recipe;
+import org.spongepowered.api.item.recipe.RecipeRegistration;
 import org.spongepowered.api.item.recipe.RecipeType;
 import org.spongepowered.api.util.CatalogBuilder;
 import org.spongepowered.api.util.ResettableBuilder;
@@ -51,7 +52,7 @@ public interface StoneCutterRecipe extends Recipe {
     /**
      * Builds a simple furnace recipe.
      */
-    interface Builder extends ResettableBuilder<StoneCutterRecipe, StoneCutterRecipe.Builder> {
+    interface Builder extends ResettableBuilder<RecipeRegistration<StoneCutterRecipe>, StoneCutterRecipe.Builder> {
 
         /**
          * Sets the ingredient and returns this builder.
@@ -96,7 +97,7 @@ public interface StoneCutterRecipe extends Recipe {
 
         }
 
-        interface EndStep extends StoneCutterRecipe.Builder, CatalogBuilder<StoneCutterRecipe, Builder> {
+        interface EndStep extends StoneCutterRecipe.Builder, CatalogBuilder<RecipeRegistration<StoneCutterRecipe>, Builder> {
 
             @Override
             EndStep key(ResourceKey key);
@@ -109,7 +110,7 @@ public interface StoneCutterRecipe extends Recipe {
              *                               or the {@link #key(ResourceKey)} isn't set.
              */
             @Override
-            StoneCutterRecipe build() throws IllegalStateException;
+            RecipeRegistration<StoneCutterRecipe> build() throws IllegalStateException;
         }
     }
 }

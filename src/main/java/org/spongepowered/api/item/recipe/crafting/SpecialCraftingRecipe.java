@@ -28,6 +28,7 @@ import org.spongepowered.api.ResourceKey;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.crafting.CraftingInventory;
+import org.spongepowered.api.item.recipe.RecipeRegistration;
 import org.spongepowered.api.util.CatalogBuilder;
 import org.spongepowered.api.util.ResettableBuilder;
 import org.spongepowered.api.world.server.ServerWorld;
@@ -56,7 +57,7 @@ public interface SpecialCraftingRecipe extends CraftingRecipe {
         return Sponge.getRegistry().getBuilderRegistry().provideBuilder(SpecialCraftingRecipe.Builder.class);
     }
 
-    interface Builder extends ResettableBuilder<SpecialCraftingRecipe, SpecialCraftingRecipe.Builder> {
+    interface Builder extends ResettableBuilder<RecipeRegistration<SpecialCraftingRecipe>, SpecialCraftingRecipe.Builder> {
 
         /**
          * Sets the recipe matcher.
@@ -132,7 +133,7 @@ public interface SpecialCraftingRecipe extends CraftingRecipe {
             EndStep result(ItemStack result);
         }
 
-        interface EndStep extends SpecialCraftingRecipe.Builder, CatalogBuilder<SpecialCraftingRecipe, SpecialCraftingRecipe.Builder> {
+        interface EndStep extends SpecialCraftingRecipe.Builder, CatalogBuilder<RecipeRegistration<SpecialCraftingRecipe>, SpecialCraftingRecipe.Builder> {
 
             @Override
             EndStep key(ResourceKey key);
@@ -145,7 +146,7 @@ public interface SpecialCraftingRecipe extends CraftingRecipe {
              *                               or the {@link #key(ResourceKey)} isn't set.
              */
             @Override
-            SpecialCraftingRecipe build() throws IllegalStateException;
+            RecipeRegistration<SpecialCraftingRecipe> build() throws IllegalStateException;
         }
 
     }
