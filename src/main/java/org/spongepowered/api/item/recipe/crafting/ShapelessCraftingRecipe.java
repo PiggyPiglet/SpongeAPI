@@ -26,6 +26,7 @@ package org.spongepowered.api.item.recipe.crafting;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Supplier;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.api.ResourceKey;
 import org.spongepowered.api.Sponge;
@@ -64,6 +65,15 @@ public interface ShapelessCraftingRecipe extends CraftingRecipe {
          * @return This builder, for chaining
          */
         ResultStep addIngredients(ItemType... ingredients);
+
+        /**
+         * Adds ingredients for this recipe.
+         *
+         * @param ingredients The ingredients to add
+         *
+         * @return This builder, for chaining
+         */
+        ResultStep addIngredients(Supplier<ItemType>... ingredients);
 
         /**
          * In this Step set the result of the Recipe.

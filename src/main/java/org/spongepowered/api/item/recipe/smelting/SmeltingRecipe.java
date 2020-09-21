@@ -96,7 +96,7 @@ public interface SmeltingRecipe extends Recipe {
     /**
      * Builds a simple furnace recipe.
      */
-    interface Builder extends ResettableBuilder<RecipeRegistration<SmeltingRecipe>, Builder> {
+    interface Builder extends CatalogBuilder<RecipeRegistration<SmeltingRecipe>, Builder> {
 
         /**
          * Sets the type of recipe
@@ -106,6 +106,17 @@ public interface SmeltingRecipe extends Recipe {
          * @return This builder, for chaining
          */
         IngredientStep type(RecipeType<SmeltingRecipe> type);
+
+        /**
+         * Sets the type of recipe
+         *
+         * @param type the type of recipe
+         *
+         * @return This builder, for chaining
+         */
+        default IngredientStep type(Supplier<RecipeType<SmeltingRecipe>> type) {
+            return this.type(type.get());
+        }
 
         interface IngredientStep extends Builder {
 

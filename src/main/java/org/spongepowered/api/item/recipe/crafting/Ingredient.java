@@ -34,6 +34,7 @@ import org.spongepowered.api.util.ResettableBuilder;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * An Ingredient for a crafting recipe.
@@ -87,6 +88,19 @@ public interface Ingredient extends Predicate<ItemStack> {
     }
 
     /**
+     * Creates a new {@link Ingredient} for the provided {@link ItemType}s.
+     *
+     * @param itemTypes The items
+     * @return The new ingredient
+     */
+    static Ingredient of(@Nullable Supplier<ItemType>... itemTypes) {
+        if (itemTypes == null || itemTypes.length == 0) {
+            return empty();
+        }
+        return builder().with(itemTypes).build();
+    }
+
+    /**
      * Creates a new {@link Ingredient} for the provided {@link ResourceKey key} which
      * should match an {@link ItemType item}.
      *
@@ -110,6 +124,14 @@ public interface Ingredient extends Predicate<ItemStack> {
          * @return This Builder, for chaining
          */
         Builder with(ItemType... types);
+
+        /**
+         * Sets one or more ItemTypes for matching the ingredient.
+         *
+         * @param types The items
+         * @return This Builder, for chaining
+         */
+        Builder with(Supplier<ItemType>... types);
 
         /**
          * Sets the item tag for matching the ingredient.

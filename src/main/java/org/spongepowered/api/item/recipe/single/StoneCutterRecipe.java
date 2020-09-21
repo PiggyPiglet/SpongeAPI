@@ -36,6 +36,7 @@ import org.spongepowered.api.util.CatalogBuilder;
 import org.spongepowered.api.util.ResettableBuilder;
 
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * A StoneCutter Recipe.
@@ -62,6 +63,17 @@ public interface StoneCutterRecipe extends Recipe {
          * @return This builder, for chaining
          */
         ResultStep ingredient(ItemType ingredient);
+
+        /**
+         * Sets the ingredient and returns this builder.
+         *
+         * @param ingredient The ingredient
+         *
+         * @return This builder, for chaining
+         */
+        default ResultStep ingredient(Supplier<ItemType> ingredient) {
+            return this.ingredient(ingredient.get());
+        }
 
         /**
          * Sets the ingredient and exemplary ingredient.
